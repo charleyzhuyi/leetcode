@@ -4,7 +4,7 @@ public:
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
         vector<string> result;
-        map<string, vector<string> > dict;
+        unordered_map<string, vector<string> > dict; //unordered_map has insert/access of O(1), hashtable
         
         
         for (int i=0;i<strs.size();i++){
@@ -16,7 +16,7 @@ public:
             dict[sig].push_back( strs[i]);
         }
         
-        map<string, vector<string> >::iterator it;
+        unordered_map<string, vector<string> >::iterator it;
         for ( it = dict.begin(); it != dict.end(); it++){
             
             if (it->second.size() > 1){ //If the vector has more than one value; means it has anagrams
