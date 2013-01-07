@@ -12,9 +12,9 @@ public:
         for (int i=0;i<num.size();i++){
             if (used[i] == false){
                 used[i] = true;
-                aPermute.push_back(num[i]);
+                aPermute[pos] = num[i];
                 recursivePermute(num,aPermute,pos+1,used);
-                aPermute.pop_back();
+               
                 used[i] = false;
             }
         }
@@ -26,7 +26,7 @@ public:
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
         result.clear();
-        vector<int> aPermute;
+        vector<int> aPermute (num.size());
         int pos = 0;
         
         bool used[num.size()];
