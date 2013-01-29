@@ -48,3 +48,37 @@ public:
         preorder(root);
     }
 };
+
+//solution 2
+class Solution {
+public:
+    void flatten(TreeNode *root) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        if (root == NULL) return;
+        TreeNode *cur = new TreeNode(0);
+        myflatten(root,cur);
+        
+        TreeNode *node = root;
+        while (node != NULL){
+            node->right = node->left;
+            node->left = NULL;
+            node = node->right;
+        }
+        
+    }
+    void myflatten(TreeNode *node, TreeNode *&current){
+        current = node;
+        
+        if (node->left){
+            myflatten(node->left,current);
+        }
+        
+        if (node->right) {
+            current->left = node->right;
+            node->right = NULL;
+            myflatten(current->left,current);
+        }
+    }
+
+};
