@@ -3,36 +3,24 @@ public:
     int jump(int A[], int n) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        int curPos = 0;
-        if (n==1) return 0;
-        
-        int numStep = 0;
-        //when the last step can not reach to the end
-        while (A[curPos] < n-1 - curPos) {
-            
-            
-            int maxRange = curPos + A[curPos];
-            int maxFrom = curPos;
-            
-            for (int i=1;i<=A[curPos];i++) {
+        int pos = 0;
+        int count = 0;
+        while (pos < n-1) {
+            int range = A[pos];
+            int select = pos+1;
+            int maxRange = 0;
+            for (int i=pos+1;i<=pos+range;i++){
+                if (i == n-1) return count+1;
                 
-                
-                int aMaxRange = curPos + i+A[curPos+i];
-                if (aMaxRange > maxRange) {
-                    maxRange = aMaxRange;
-                    maxFrom = curPos + i;
+                int cRange = A[i]+i;
+                if (cRange > maxRange) {
+                    maxRange = cRange;
+                    select = i;
                 }
-                
             }
-            
-            curPos = maxFrom;
-            numStep++;
-            
-            
+            pos = select;
+            count++;
         }
-        
-        return numStep+1;
-        
-        
+        return count;
     }
 };
