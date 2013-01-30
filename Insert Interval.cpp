@@ -9,47 +9,28 @@
  */
 class Solution {
 public:
-    Interval merge(Interval it1, Interval it2) {
-        
-        int start;
-        it1.start < it2.start ? start = it1.start: start = it2.start;
-        
-        int end;
-        it1.end > it2.end? end = it1.end: end = it2.end;
-        
-        
-        
-        return Interval(start,end); 
-        
-    }
-
     vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        vector<Interval> resultVector;
-        bool done =false;
-        
-        for (int i=0;i<intervals.size();i++) {
-            
-            Interval readInter = intervals[i];
-            
-            if (readInter.end < newInterval.start)
-                resultVector.push_back(readInter);
-            else if (newInterval.end < readInter.start) {
-                resultVector.push_back(newInterval);
-                resultVector.insert(resultVector.end(),intervals.begin()+i,intervals.end());
-                done  = true;
-                break;
+        vector<Interval> result;
+        while (!intervals.empty()){
+            Interval current = intervals.front();
+            intervals.erase(intervals.begin());
+            if (newInterval.end < current.start){
+                result.push_back(newInterval);
+                result.push_back(current);
+                result.insert(result.end(),intervals.begin(),intervals.end());
+                return result;
+            } else if (newInterval.start > current.end){
+                result.push_back(current);
             } else {
-                newInterval = merge (readInter,newInterval);
+                int new_start = min(newInterval.start,current.start);
+                int new_end = max(newInterval.end,current.end);
+                newInterval.start = new_start;
+                newInterval.end = new_end;
             }
-            
         }
-        
-        if (!done) {
-            resultVector.push_back(newInterval);
-        }
-        
-        return resultVector;
+        result.push_back(newInterval);
+        return result;
     }
 };
