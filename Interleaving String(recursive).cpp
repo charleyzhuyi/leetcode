@@ -1,42 +1,25 @@
 class Solution {
 public:
+    bool flag;
     bool isInterleave(string s1, string s2, string s3) {
         // Start typing your C/C++ solution below
-        // DO NOT write int main() function    
-        if (s1.empty() && s2.empty() && s3.empty()) return true;
-        if (s1.empty() && s2.empty() && !s3.empty()) return false;
-       
-        if (s1.empty() && !s2.empty()) {
-            
-            if (s2.compare(s3) == 0)
-                return true;
-            else
-                return false;
-        }
-        
-        if (!s1.empty() && s2.empty()) {
-            
-            if (s1.compare(s3) == 0)
-                return true;
-            else
-                return false;
-        }
-        
-        char c1 = s1.at(0);
-        char    c2 = s2.at(0);  
-        char c3 = s3.at(0);
-        bool sumResult = false;
-  
-        if (c1 == c3) 
-            sumResult = sumResult || isInterleave(string(s1,1),s2,string(s3,1));
-            
-        if (c2 == c3) 
-             sumResult = sumResult ||  isInterleave(s1,string(s2,1),string(s3,1));
-
-        return sumResult;
-        
+        // DO NOT write int main() function
+        flag = false;
+        checkInterleavee(s1,s2,s3);
+        return flag;
     }
     
-    
-    
+    void checkInterleavee(string s1, string s2, string s3) {
+         if ( s3.empty()){
+            if (s1.empty() && s2.empty()) {
+                flag = true;   
+                return;
+            }
+            else return;
+        }
+        if (s3[0] == s1[0])
+            checkInterleavee(s1.substr(1),s2,s3.substr(1));
+        if (s3[0] == s2[0])
+             checkInterleavee(s1,s2.substr(1),s3.substr(1));
+    }
 };
