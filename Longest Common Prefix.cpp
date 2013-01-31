@@ -3,31 +3,20 @@ public:
     string longestCommonPrefix(vector<string> &strs) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        string result;
-        if (strs.empty()) return result;
-        
-        result = strs.front();
-        
-
-        for (int i=1;i<strs.size();i++){
-            
-            string readStr = strs[i];
-            
-            for (int j=0;j<result.size();j++) {
-                
-                char readChar;
-                if ( j >= readStr.size())
-                    readChar = ' ';
-                else
-                    readChar = readStr[j];
-                    
-                if (result[j] != readStr[j]) {
-                    result = result.substr(0,j);
-                }  
-                
+        string pstr;
+        if (strs.empty()) return pstr;
+        string compStr = strs.back();
+        strs.pop_back();
+        bool stop = false;
+        for (int i=0;i<compStr.size();i++){
+            for (int j=0;j<strs.size();j++){
+                string str = strs[j];
+                if ( i >= str.size()) {stop = true; break;}
+                if (compStr[i] != str[i]){stop = true; break;}
             }
-            
+            if (stop) break;
+            else pstr = pstr + compStr[i];
         }
-        return result;
+        return pstr;
     }
 };
