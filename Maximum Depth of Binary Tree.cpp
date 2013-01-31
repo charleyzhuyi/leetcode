@@ -9,28 +9,12 @@
  */
 class Solution {
 public:
-    
-    
-    void getmaxDepth(TreeNode *node,int depth,int &max) {
-        if (node == NULL) return;
-        
-        depth++;
-        if (depth>max)
-            max = depth;
-        
-        
-        getmaxDepth(node->left,depth,max);
-        getmaxDepth(node->right,depth,max);
-        
-        
-    }
-
-    int maxDepth(TreeNode *root) {
+    int maxDepth(TreeNode *node) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        int depth = 0;
-        int max = 0;
-        getmaxDepth(root,depth,max);
-        return max;
+        if (node == NULL) return 0;
+        int left = maxDepth(node->left);
+        int right = maxDepth(node->right);
+        return max(left,right)+1;
     }
 };
