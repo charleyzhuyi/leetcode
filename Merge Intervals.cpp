@@ -8,7 +8,7 @@
  * };
  */
 
-/* sort takes O(nlogn), thus total time is O(nlogn)
+/* sort takes O(nlogn), thus total time is O(nlogn) */
  struct less_than_key
 {
     inline bool operator() (const Interval& struct1, const Interval& struct2)
@@ -52,15 +52,7 @@ public:
 /* 
    another solution , using mergesort like algorithm, also takes O(nlogn)
 */
-/**
- * Definition for an interval.
- * struct Interval {
- *     int start;
- *     int end;
- *     Interval() : start(0), end(0) {}
- *     Interval(int s, int e) : start(s), end(e) {}
- * };
- */
+
 class Solution {
 public:
     vector<Interval> merge_interval(vector<Interval> &left,vector<Interval> &right){
