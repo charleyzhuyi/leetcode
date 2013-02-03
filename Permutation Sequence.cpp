@@ -35,3 +35,47 @@ public:
         return result;
     }
 };
+
+
+/* recursion solution */
+class Solution {
+public:
+    string result;
+    int factorial(int n){
+        if (n == 0 || n==1 ) {
+            return 1;
+        }else {
+            return factorial(n-1)*n;
+        }
+    }
+    string getPermutation(int n, int k) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        result = "";
+        vector<int>num;
+        for (int i=1;i<=n;i++){
+            num.push_back(i);
+        }
+        myPermutation(num,k);
+        return result;
+    }
+    
+    void myPermutation(vector<int>num,int k){
+        int n = num.size();
+        if (n == 1) {
+            result += (char)(num[0]+'0');
+            return;
+        }
+        int width = factorial(n)/n;
+        int nbegin = (k-1)/width;
+        result += (char)(num[nbegin]+'0');
+        num.erase(num.begin()+nbegin);
+        
+        int newk = k % width;
+        if (newk==0) {
+            newk = width;
+        }
+        
+        myPermutation(num,newk);
+    }
+};
