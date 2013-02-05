@@ -1,3 +1,31 @@
+/* Using recursion */
+class Solution {
+public:
+    vector<vector<int> >result;
+    vector<vector<int> > subsets(vector<int> &S) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        result.clear();
+        vector<int> aSub;
+        sort(S.begin(),S.end());
+        getsubset(S,aSub,0);
+        return result;
+    }
+    void getsubset(vector<int> &S,vector<int>aSub,int step){
+        if (step == S.size()){
+            result.push_back(aSub);
+            return;
+        }
+        
+        //int not selected
+        getsubset(S,aSub,step+1);    
+        //int selected
+        aSub.push_back(S[step]);
+        getsubset(S,aSub,step+1);
+    }
+};
+
+/* Iteration */
 class Solution {
 public:
     vector<vector<int> > subsets(vector<int> &S) {
